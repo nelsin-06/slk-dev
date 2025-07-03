@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  mysql-slk-db:
+    image: mysql:lts
+    container_name: slk-mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 12345678
+      MYSQL_DATABASE: slk-db
+    ports:
+      - "3306:3306"
+
+  app:
+    build: .
+    container_name: slk-api
+    restart: always
+    depends_on:
+      - mysql-slk-db
+    environment:
+      - DATABASE_URL=mysql://root:12345678@mysql-slk-db:3306/slk-db
+    ports:
+      - "3000:3000"
+    command: >
+      sh -c "npm run start:slk"
+    volumes:
+      - ./src:/usr/src/app/src
