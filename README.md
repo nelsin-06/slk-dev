@@ -4,6 +4,12 @@ API RESTful desarrollada con **NestJS**, **Prisma ORM** y **MySQL** para la gest
 
 ---
 
+## 🚀 Probar API en Postman
+
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://www.postman.com/dark-equinox-132990/workspace/slk-dev)
+
+
+---
 ## 🚀 **¿Qué hace esta API?**
 
 - **Usuarios**: Crear, listar, actualizar, eliminar (soft delete) y consultar usuarios.
