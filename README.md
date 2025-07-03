@@ -8,7 +8,6 @@ API RESTful desarrollada con **NestJS**, **Prisma ORM** y **MySQL** para la gest
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://www.postman.com/dark-equinox-132990/workspace/slk-dev/collection/22972674-116db138-a561-409c-b653-4d5de3f243d1?action=share&creator=22972674&active-environment=22972674-862c63a9-fb4c-4179-af5b-cf840c5f4730)
 
-Si lo prefiere, puede utilizar el archivo de colección adjunto para probar la API directamente desde su instancia de Postman.
 
 ---
 ## 🚀 **¿Qué hace esta API?**
