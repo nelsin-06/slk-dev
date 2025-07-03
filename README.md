@@ -43,6 +43,11 @@ src/
 │   ├── database.module.ts
 │   └── database.service.ts
 └── main.ts
+test/
+├── services/
+│   ├── users.service.spec.ts
+│   └── messages.service.spec.ts
+└── ...
 ```
 
 ---
@@ -77,9 +82,9 @@ Crea un archivo `.env` en la raíz del proyecto con el siguiente contenido:
 DATABASE_URL="mysql://usuario:contraseña@localhost:3306/nombre_db"
 ```
 
-Ejemplo para pruebas locales:
+Ejemplo para pruebas locales: (cambiar según corresponda a su database)
 ```
-DATABASE_URL="mysql://root:12345678@localhost:3306/slk-db"
+DATABASE_URL="mysql://root:12345678@localhost:3306/slk-db" 
 ```
 
 ---
@@ -89,7 +94,7 @@ DATABASE_URL="mysql://root:12345678@localhost:3306/slk-db"
 1. **Clona el repositorio**
    ```bash
    git clone <url-del-repo>
-   cd selaski-dev
+   cd slk-dev
    ```
 
 2. **Configura las variables de entorno**
@@ -117,15 +122,46 @@ DATABASE_URL="mysql://root:12345678@localhost:3306/slk-db"
 Para evitar problemas de dependencias y asegurar un entorno consistente, se recomienda usar Docker Compose:
 
 1. **Asegúrate de tener Docker y Docker Compose instalados.**
-2. **Copia el archivo `.env` en la raíz del proyecto y configura tu `DATABASE_URL` para apuntar al servicio MySQL del Compose.**
-3. **Ejecuta:**
+
+2. **Ejecuta:**
    ```bash
    docker-compose up --build
    ```
-4. **La API estará disponible en:**  
+3. **La API estará disponible en:**  
    [http://localhost:3000](http://localhost:3000)
 
 > **Sugerencia:** Usar Docker Compose es la forma más sencilla y confiable de levantar el entorno, especialmente para evitar errores de conexión o diferencias entre sistemas operativos.
+
+---
+
+## 🧪 **Testing con Vitest**
+
+Este proyecto utiliza **Vitest** como framework de testing por su velocidad, simplicidad y excelente integración con TypeScript.
+
+### **Ejecutar tests:**
+
+```bash
+# Ejecutar todos los tests una vez
+npm run test:vitest
+
+# Ejecutar tests en modo watch (detecta cambios)
+npm run test:vitest:watch
+```
+
+### **Cobertura de tests:**
+Los tests cubren:
+- ✅ **UsersService**: CRUD completo, validaciones y soft delete
+- ✅ **MessagesService**: Creación, consultas y validación de usuarios
+- ✅ **Manejo de errores**: Excepciones específicas de Prisma
+- ✅ **Mocks**: DatabaseService y dependencias inyectadas
+
+### **Estructura de tests:**
+```
+test/
+├── services/
+│   ├── users.service.spec.ts     # Tests para UsersService
+│   └── messages.service.spec.ts  # Tests para MessagesService
+```
 
 ---
 
@@ -152,7 +188,8 @@ Si los permisos son insuficientes, Prisma puede fallar al aplicar migraciones o 
 
 ---
 
-## 🧑‍💻 **Autor**
+## 🤝 Author
 
-Desarrollado por **Nelson Gallego**  
-_Backend Developer_
+**Nelson Gallego**  
+[GitHub](https://github.com/nelsin-06)  
+[LinkedIn](https://www.linkedin.com/in/nelson-gallego-tec-dev)
