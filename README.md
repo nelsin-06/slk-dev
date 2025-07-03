@@ -92,13 +92,13 @@ DATABASE_URL="mysql://root:12345678@localhost:3306/slk-db"
    cd selaski-dev
    ```
 
-2. **Instala dependencias**
+2. **Configura las variables de entorno**
+   - Copia `.env.example` a `.env` y edita según tu entorno.
+
+3. **Instala dependencias**
    ```bash
    npm install
    ```
-
-3. **Configura las variables de entorno**
-   - Copia `.env.example` a `.env` y edita según tu entorno.
 
 4. **Ejecuta el proyecto (esto realiza migraciones, genera el cliente Prisma y levanta el servidor)**
    ```bash
@@ -156,5 +156,3 @@ Si los permisos son insuficientes, Prisma puede fallar al aplicar migraciones o 
 
 Desarrollado por **Nelson Gallego**  
 _Backend Developer_
-
----
