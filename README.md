@@ -100,23 +100,39 @@ DATABASE_URL="mysql://root:12345678@localhost:3306/slk-db"
 3. **Configura las variables de entorno**
    - Copia `.env.example` a `.env` y edita según tu entorno.
 
-4. **Aplica las migraciones de la base de datos**
+4. **Ejecuta el proyecto (esto realiza migraciones, genera el cliente Prisma y levanta el servidor)**
    ```bash
-   npx prisma migrate dev --name init
+   npm run start:slk
    ```
 
-5. **Genera el cliente Prisma**
-   ```bash
-   npx prisma generate
-   ```
+   > **Nota:** El comando `start:slk` ejecuta todos los pasos necesarios automáticamente.
 
-6. **Inicia la aplicación**
-   ```bash
-   npm run start:dev
-   ```
-
-7. **La API estará disponible en**:  
+5. **La API estará disponible en**:  
    [http://localhost:3000](http://localhost:3000)
+
+---
+
+## 🐳 **Ejecución con Docker Compose (Recomendado)**
+
+Para evitar problemas de dependencias y asegurar un entorno consistente, se recomienda usar Docker Compose:
+
+1. **Asegúrate de tener Docker y Docker Compose instalados.**
+2. **Copia el archivo `.env` en la raíz del proyecto y configura tu `DATABASE_URL` para apuntar al servicio MySQL del Compose.**
+3. **Ejecuta:**
+   ```bash
+   docker-compose up --build
+   ```
+4. **La API estará disponible en:**  
+   [http://localhost:3000](http://localhost:3000)
+
+> **Sugerencia:** Usar Docker Compose es la forma más sencilla y confiable de levantar el entorno, especialmente para evitar errores de conexión o diferencias entre sistemas operativos.
+
+---
+
+## ⚠️ **Advertencia sobre permisos de la base de datos**
+
+Asegúrate de que el usuario de la base de datos tenga los **permisos necesarios** para crear tablas, migrar y modificar datos.  
+Si los permisos son insuficientes, Prisma puede fallar al aplicar migraciones o generar el esquema.
 
 ---
 
@@ -139,4 +155,6 @@ DATABASE_URL="mysql://root:12345678@localhost:3306/slk-db"
 ## 🧑‍💻 **Autor**
 
 Desarrollado por **Nelson Gallego**  
-_Backend
+_Backend Developer_
+
+---
