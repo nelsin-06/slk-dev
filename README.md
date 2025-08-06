@@ -1,35 +1,36 @@
-# 🧪 Selaski API - Prueba Técnica Backend
 
-API RESTful desarrollada con **NestJS**, **Prisma ORM** y **MySQL** para la gestión de usuarios y mensajes. Incluye validaciones robustas, manejo centralizado de errores y buenas prácticas de arquitectura.
+# 🧪 slk API - Structured Logic Kernel API
+
+RESTful API built with **NestJS**, **Prisma ORM**, and **MySQL** for managing users and messages. It includes robust validations, centralized error handling, and best architectural practices.
 
 ---
 
-## 🚀 Probar API en Postman
+## 🚀 Try the API in Postman
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://www.postman.com/dark-equinox-132990/workspace/slk-dev/collection/22972674-116db138-a561-409c-b653-4d5de3f243d1?action=share&creator=22972674&active-environment=22972674-862c63a9-fb4c-4179-af5b-cf840c5f4730)
 
-
----
-## 🚀 **¿Qué hace esta API?**
-
-- **Usuarios**: Crear, listar, actualizar, eliminar (soft delete) y consultar usuarios.
-- **Mensajes**: Crear mensajes asociados a usuarios y listar mensajes de un usuario.
-- **Validaciones**: 
-  - Email único y con formato válido.
-  - Campos obligatorios y tipos correctos.
-  - No se pueden crear mensajes para usuarios inexistentes o inactivos.
-  - No se pueden actualizar ni eliminar usuarios inexistentes.
-- **Manejo de errores**: 
-  - Respuestas estandarizadas para errores y éxitos.
-  - Excepciones HTTP claras (404, 409, 400, 500).
-- **Guards**: 
-  - Validación previa de existencia de usuario en rutas protegidas.
-
 ---
 
-## 📦 **Estructura de carpetas relevante**
+## 🚀 **What does this API do?**
 
-```
+- **Users**: Create, list, update, delete (soft delete), and retrieve users.
+- **Messages**: Create messages associated with users and list a user's messages.
+- **Validations**:
+  - Email must be unique and valid.
+  - Required fields and correct data types.
+  - Cannot create messages for non-existent or inactive users.
+  - Cannot update or delete non-existent users.
+- **Error Handling**:
+  - Standardized responses for errors and success.
+  - Clear HTTP exceptions (404, 409, 400, 500).
+- **Guards**:
+  - Pre-validation for user existence on protected routes.
+
+---
+
+## 📦 **Relevant Folder Structure**
+
+```plaintext
 src/
 ├── users/
 │   ├── dto/
@@ -58,139 +59,139 @@ test/
 
 ---
 
-## 🛡️ **Validaciones y reglas de negocio**
+## 🛡️ **Validations & Business Rules**
 
-- **Usuarios**
-  - `name`: string, obligatorio.
-  - `email`: string, obligatorio, formato válido, único.
-  - `active`: boolean, opcional (por defecto `true`).
-  - No se puede crear un usuario con email repetido.
-  - No se puede actualizar/eliminar un usuario inexistente.
-- **Mensajes**
-  - `content`: string, obligatorio, no vacío.
-  - `userId`: int, obligatorio, debe existir y estar activo.
-  - No se puede crear un mensaje para un usuario inexistente.
+- **Users**
+  - `name`: string, required.
+  - `email`: string, required, valid format, unique.
+  - `active`: boolean, optional (default `true`).
+  - Cannot create a user with an existing email.
+  - Cannot update/delete a non-existent user.
+- **Messages**
+  - `content`: string, required, not empty.
+  - `userId`: int, required, must exist and be active.
+  - Cannot create messages for non-existent users.
 - **Guards**
-  - Rutas como `/users/:id`, `/users/:id/messages` y `/messages` validan que el usuario exista antes de ejecutar la lógica.
-- **Errores**
-  - 404: Usuario no encontrado.
-  - 409: Email ya existe.
-  - 400: Datos inválidos.
-  - 500: Error interno.
+  - Routes like `/users/:id`, `/users/:id/messages`, and `/messages` validate user existence beforehand.
+- **Errors**
+  - 404: User not found.
+  - 409: Email already exists.
+  - 400: Invalid data.
+  - 500: Internal server error.
 
 ---
 
-## 📝 **Variables de entorno necesarias**
+## 📝 **Required Environment Variables**
 
-Crea un archivo `.env` en la raíz del proyecto con el siguiente contenido:
+Create a `.env` file at the project root with the following content:
 
-```
-DATABASE_URL="mysql://usuario:contraseña@localhost:3306/nombre_db"
+```env
+DATABASE_URL="mysql://user:password@localhost:3306/db_name"
 ```
 
-Ejemplo para pruebas locales: (cambiar según corresponda a su database)
-```
+Example for local testing (adjust to your setup):
+```env
 DATABASE_URL="mysql://root:12345678@localhost:3306/slk-db" 
 ```
 
 ---
 
-## ⚙️ **Pasos para ejecutar el proyecto**
+## ⚙️ **Steps to Run the Project**
 
-1. **Clona el repositorio**
+1. **Clone the repository**
    ```bash
-   git clone <url-del-repo>
+   git clone <repo-url>
    cd slk-dev
    ```
 
-2. **Configura las variables de entorno**
-   - Copia `.env.example` a `.env` y edita según tu entorno.
+2. **Set up environment variables**
+   - Copy `.env.example` to `.env` and edit accordingly.
 
-3. **Instala dependencias**
+3. **Install dependencies**
    ```bash
    npm install
    ```
 
-4. **Ejecuta el proyecto (esto realiza migraciones, genera el cliente Prisma y levanta el servidor)**
+4. **Start the project (runs migrations, generates Prisma client, and launches the server)**
    ```bash
    npm run start:slk
    ```
 
-   > **Nota:** El comando `start:slk` ejecuta todos los pasos necesarios automáticamente.
+   > **Note:** The `start:slk` command runs all necessary steps automatically.
 
-5. **La API estará disponible en**:  
+5. **The API will be available at:**  
    [http://localhost:3000](http://localhost:3000)
 
 ---
 
-## 🐳 **Ejecución con Docker Compose (Recomendado)**
+## 🐳 **Run with Docker Compose (Recommended)**
 
-Para evitar problemas de dependencias y asegurar un entorno consistente, se recomienda usar Docker Compose:
+To avoid dependency issues and ensure a consistent environment, Docker Compose is recommended:
 
-1. **Asegúrate de tener Docker y Docker Compose instalados.**
+1. **Ensure Docker and Docker Compose are installed.**
 
-2. **Ejecuta:**
+2. **Run:**
    ```bash
    docker-compose up --build
    ```
-3. **La API estará disponible en:**  
+
+3. **The API will be available at:**  
    [http://localhost:3000](http://localhost:3000)
 
-> **Sugerencia:** Usar Docker Compose es la forma más sencilla y confiable de levantar el entorno, especialmente para evitar errores de conexión o diferencias entre sistemas operativos.
+> **Tip:** Docker Compose is the easiest and most reliable way to spin up the environment, especially to avoid connection errors or OS-specific issues.
 
 ---
 
-## 🧪 **Testing con Vitest**
+## 🧪 **Testing with Vitest**
 
-Este proyecto utiliza **Vitest** como framework de testing por su velocidad, simplicidad y excelente integración con TypeScript.
+This project uses **Vitest** as its testing framework for its speed, simplicity, and excellent TypeScript integration.
 
-### **Ejecutar tests:**
+### **Run tests:**
 
 ```bash
-# Ejecutar todos los tests una vez
+# Run all tests once
 npm run test:vitest
 
-# Ejecutar tests en modo watch (detecta cambios)
+# Run tests in watch mode (auto-runs on changes)
 npm run test:vitest:watch
 ```
 
-### **Cobertura de tests:**
-Los tests cubren:
-- ✅ **UsersService**: CRUD completo, validaciones y soft delete
-- ✅ **MessagesService**: Creación, consultas y validación de usuarios
-- ✅ **Manejo de errores**: Excepciones específicas de Prisma
-- ✅ **Mocks**: DatabaseService y dependencias inyectadas
+### **Test coverage includes:**
+- ✅ **UsersService**: Full CRUD, validations, and soft delete
+- ✅ **MessagesService**: Creation, queries, and user validation
+- ✅ **Error handling**: Specific Prisma exceptions
+- ✅ **Mocks**: DatabaseService and injected dependencies
 
-### **Estructura de tests:**
-```
+### **Test structure:**
+```plaintext
 test/
 ├── services/
-│   ├── users.service.spec.ts     # Tests para UsersService
-│   └── messages.service.spec.ts  # Tests para MessagesService
+│   ├── users.service.spec.ts     # Tests for UsersService
+│   └── messages.service.spec.ts  # Tests for MessagesService
 ```
 
 ---
 
-## ⚠️ **Advertencia sobre permisos de la base de datos**
+## ⚠️ **Database Permissions Warning**
 
-Asegúrate de que el usuario de la base de datos tenga los **permisos necesarios** para crear tablas, migrar y modificar datos.  
-Si los permisos son insuficientes, Prisma puede fallar al aplicar migraciones o generar el esquema.
+Ensure your database user has **sufficient permissions** to create tables, perform migrations, and modify data.  
+Without the proper privileges, Prisma may fail to apply migrations or generate the schema.
 
 ---
 
-## 📚 **Endpoints principales**
+## 📚 **Main Endpoints**
 
-### Usuarios
-- `POST /users` — Crear usuario
-- `GET /users` — Listar usuarios
-- `GET /users/:id` — Consultar usuario por ID
-- `PATCH /users/:id` — Actualizar usuario
-- `DELETE /users/:id` — Eliminar usuario (soft delete)
-- `GET /users/:id/messages` — Listar mensajes de un usuario
+### Users
+- `POST /users` — Create a user  
+- `GET /users` — List users  
+- `GET /users/:id` — Get user by ID  
+- `PATCH /users/:id` — Update user  
+- `DELETE /users/:id` — Soft delete user  
+- `GET /users/:id/messages` — List messages by user
 
-### Mensajes
-- `POST /messages` — Crear mensaje asociado a un usuario
-- `GET /messages` — Listar todos los mensajes
+### Messages
+- `POST /messages` — Create a message linked to a user  
+- `GET /messages` — List all messages
 
 ---
 
@@ -199,3 +200,5 @@ Si los permisos son insuficientes, Prisma puede fallar al aplicar migraciones o 
 **Nelson Gallego**  
 [GitHub](https://github.com/nelsin-06)  
 [LinkedIn](https://www.linkedin.com/in/nelson-gallego-tec-dev)
+
+---
